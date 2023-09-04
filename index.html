@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.88.1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href=""https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="css/normalize.css">
+
+	<title>UTUT</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+
+<body data-new-gr-c-s-check-loaded="14.1091.0" data-gr-ext-installed="">
+
+<div class="container" >
+<header role="banner">
+</header>
+<main role="main">
+<article itemscope itemtype="https://schema.org/BlogPosting">
+
+<div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded">
+	<div class="text-center">
+        <h3>Towards Practical and Efficient Image-to-Speech Captioning<br>with Vision-Language Pre-training and Unit-to-Unit Translation</h3>
+
+        <p class="fst-italic mb-0">
+          <br>
+		  Minsu Kim, Jeongsoo Choi, Soumi Maiti, Jeong Hun Yeo, Shinji Watanabe, Yong Man Ro
+        </p>
+	</div>
+</div>
+
+<div class="container pt-5 mt-5 shadow-lg p-5 mb-5 bg-white rounded">
+	<h4 id="samples" style="text-align: center;">Samples from the SpokenCOCO dataset</h4>
+	<br>
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th style="text-align: center">Image</th>
+					<th style="text-align: center">SAT-VQ3-FT</th>
+					<th style="text-align: center">Ours</th>
+					<th style="text-align: center">Ours (Image Unit)</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/155.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/155.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/155.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/155.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/1686.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/1686.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/1686.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/1686.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/3233.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/3233.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/3233.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/3233.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/4882.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/4882.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/4882.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/4882.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/6515.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/6515.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/6515.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/6515.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/8309.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/8309.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/8309.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/8309.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/11809.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/11809.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/11809.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/11809.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/13471.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/13471.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/13471.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/13471.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/15061.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/15061.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/15061.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/15061.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/16622.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/16622.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/16622.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/16622.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/18302.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/18302.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/18302.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/18302.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/19877.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/19877.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/19877.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/19877.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/21549.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/21549.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/21549.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/21549.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/23024.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/23024.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/23024.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/23024.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/24752.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/24752.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/24752.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/24752.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/26030.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/26030.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/26030.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/26030.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/26166.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/26166.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/26166.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/26166.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/27582.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/27582.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/27582.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/27582.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/29172.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/29172.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/29172.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/29172.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+				<tr>
+					<td style="vertical-align: middle; text-align: center"><img src="images/30773.jpg" style="min-width: 240px;"/></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/SAT-VQ3-FT/30773.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours/30773.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+					<td style="vertical-align: middle; text-align: center"><audio controls="controls" style="width: 260px;"><source src="audios/Ours (Image Unit)/30773.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br>
+</div>
+
+
+</article>
+</main>
+</div>
+
+</body>
+</html>
